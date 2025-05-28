@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday!</title>
+  <!-- Link to Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+/* General Styles */
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #ff5e5e 0%, #ff6b81 20%, #ff9a9e 50%, #ff4d4d 80%, #c2185b 100%);
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  text-align: center;
+  overflow: hidden;
+}
+
+.container {
+  border-radius: 50px;
+  background: rgba(0, 0, 0, 0.6);
+  transition: background-color 1.5s ease;
+  padding: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px; /* Gap between heading, paragraph, and buttons */
+}
+
+.button-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px; /* Gap between rows */
+}
+
+.button-row {
+  display: flex;
+  gap: 10px; /* Gap between buttons in the same row */
+}
+
+#startButton,
+#addHearts,
+#addBalloons {
+  font-size: 1.2em;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+#startButton {
+  background-color: #ff6f61;
+  color: #fff;
+}
+
+#startButton:hover {
+  background-color: #ff4b3a;
+  transform: scale(1.05);
+}
+
+#addHearts,
+#addBalloons {
+  background-color: #ff9a9e;
+  color: #fff;
+}
+
+#addHearts:hover,
+#addBalloons:hover {
+  background-color: #ff6b81;
+  transform: scale(1.05);
+}
+
+h1 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 3em;
+  margin-bottom: 20px;
+  animation: fadeIn 2s ease-out;
+}
+
+p {
+  font-size: 1.5em;
+  margin-bottom: 30px;
+  animation: fadeIn 3s ease-out;
+}
+
+button {
+  background-color: #ff6f61;
+  border: none;
+  color: #fff;
+  padding: 15px 30px;
+  font-size: 1.2em;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s, transform 0.2s;
+  animation: bounceIn 2s ease-out;
+}
+
+button:hover {
+  background-color: #ff4b3a;
+  transform: scale(1.1);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes bounceIn {
+  0% { transform: scale(0.5); opacity: 0; }
+  50% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+/* Hearts Animation */
+.heart {
+  position: absolute;
+  width: 30px; /* Increased size */
+  height: 30px; /* Increased size */
+  background-color: red;
+  margin: 0;
+  transform: rotate(-45deg);
+  animation: floatHearts 10s linear infinite;
+  z-index: 5;
+}
+
+.heart::before,
+.heart::after {
+  content: "";
+  position: absolute;
+  width: 30px; /* Increased size */
+  height: 30px; /* Increased size */
+  background-color: red;
+  border-radius: 50%;
+}
+
+.heart::before {
+  top: -20px;
+  left: 0;
+}
+
+.heart::after {
+  left: 20px;
+  top: 0;
+}
+
+@keyframes floatHearts {
+  0% {
+    bottom: -50px;
+    opacity: 0;
+    transform: rotate(-45deg) translateX(0) scale(0.8);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    bottom: 100vh;
+    opacity: 0;
+    transform: rotate(-45deg) translateX(-100px) scale(1.5);
+  }
+}
+
+.container:hover {
+  background: rgba(233, 4, 73, 0.3);
+  transform: scale(1.1);
+  transition: 1.5s all ease;
+}
+
+/* Balloons Animation */
+.balloon {
+  position: absolute;
+  bottom: -150px;
+  width: 30px; /* Increased size */
+  height: 40px; /* Increased size */
+  background: linear-gradient(to bottom, #ff6f61, #ff4b3a);
+  border-radius: 20px 20px 0 0;
+  animation: floatBalloons 12s linear infinite;
+  z-index: 5;
+}
+
+.balloon::before {
+  content: "";
+  position: absolute;
+  bottom: -30px; /* Adjusted position */
+  left: 50%;
+  width: 2px;
+  height: 30px;
+  background: #555;
+}
+
+@keyframes floatBalloons {
+  0% {
+    bottom: -150px;
+    opacity: 0;
+    transform: translateX(0) scale(0.8);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    bottom: 100vh;
+    opacity: 0;
+    transform: translateX(50px) scale(1.2);
+  }
+}
+
+/* Fireworks */
+.firework {
+  position: absolute;
+  width: 20px; /* Increased size */
+  height: 20px; /* Increased size */
+  border-radius: 50%;
+  background: radial-gradient(circle, #ff6f61, #ff4b3a); /* Poppy colors */
+  animation: burst 1.5s ease-out infinite;
+  z-index: 5;
+}
+
+@keyframes burst {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  80% {
+    transform: scale(3);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+/* Firework particles */
+.particle {
+  position: absolute;
+  width: 12px; /* Size of particles */
+  height: 12px; /* Size of particles */
+  border-radius: 50%;
+  background: radial-gradient(circle, #ff6f61, #ff4b3a);
+  animation: explode 1s ease-out;
+  z-index: 5;
+}
+
+@keyframes explode {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+/* Container for Hearts, Balloons, Fireworks */
+.animations-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.footer {
+  font-family: "Edu AU VIC WA NT Hand", cursive;
+  box-shadow: 0 5px 30px 5px rgba(0, 0, 0, 0.5);
+  position: fixed;
+  bottom: 20px;
+  padding: 20px 40px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(12px);
+  color: #fff;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  text-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
+  border-radius: 15px;
+}
+
+.footer:hover {
+  cursor: pointer;
+  text-shadow: 0 0 30px rgba(195, 18, 65, 0.908);
+  color: black;
+  font-size: 27px;
+  transition: all 0.4s;
+  border-radius: 35px;
+  box-shadow: 0 10px 20px rgba(10, 46, 207, 0.3);
+}
+
+.footer a {
+  text-decoration: none;
+  color: white;
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.5em;
+  }
+
+  p {
+    font-size: 1.2em;
+  }
+
+  button {
+    font-size: 1em;
+    padding: 10px 20px;
+  }
+
+  .container {
+    padding: 20px;
+    border-radius: 30px;
+  }
+
+  .button-row {
+    flex-direction: column;
+  }
+
+  #addHearts, #addBalloons {
+    width: 100%;
+  }
+
+  .footer {
+    font-size: 20px;
+    padding: 15px 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 2em;
+  }
+
+  p {
+    font-size: 1em;
+  }
+
+  button {
+    font-size: 0.9em;
+    padding: 8px 16px;
+  }
+
+  .container {
+    padding: 15px;
+    border-radius: 20px;
+  }
+
+  .footer {
+    font-size: 18px;
+    padding: 10px 20px;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <audio src="assets/birthday.mp3" autoplay loop></audio>
+  <video src="assets/birthday.mp3" height="0px" width="0px" autoplay loop></video>
+  <div class="container">
+    <h1>Happy Birthday, Aastha!</h1>
+    <p>Click the button below to start the celebration and see something special.</p>
+    <div class="button-wrapper">
+      <button id="startButton">Start Celebration</button>
+      <div class="button-row">
+        <button id="addHearts">Add Hearts</button>
+        <button id="addBalloons">Add Balloons</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Container for animations -->
+  <div class="animations-container">
+    <!-- Generate hearts -->
+    <div class="heart" style="left: 10%; animation-delay: 0s;"></div>
+    <div class="heart" style="left: 20%; animation-delay: 1s;"></div>
+    <div class="heart" style="left: 30%; animation-delay: 2s;"></div>
+    <div class="heart" style="left: 40%; animation-delay: 3s;"></div>
+    <div class="heart" style="left: 50%; animation-delay: 4s;"></div>
+    <div class="heart" style="left: 60%; animation-delay: 5s;"></div>
+    <div class="heart" style="left: 70%; animation-delay: 6s;"></div>
+    <div class="heart" style="left: 80%; animation-delay: 7s;"></div>
+
+    <!-- Generate balloons -->
+    <div class="balloon" style="left: 10%; animation-delay: 1s;"></div>
+    <div class="balloon" style="left: 25%; animation-delay: 3s;"></div>
+    <div class="balloon" style="left: 40%; animation-delay: 5s;"></div>
+    <div class="balloon" style="left: 55%; animation-delay: 7s;"></div>
+    <div class="balloon" style="left: 70%; animation-delay: 9s;"></div>
+
+    <!-- Generate fireworks -->
+    <div class="firework" style="top: 50%; left: 20%;"></div>
+    <div class="firework" style="top: 30%; left: 50%; animation-delay: 0.5s;"></div>
+    <div class="firework" style="top: 70%; left: 80%; animation-delay: 1s;"></div>
+
+    <!-- Generate firework particles -->
+    <div class="particle" style="top: 45%; left: 20%; animation-delay: 1.5s;"></div>
+    <div class="particle" style="top: 35%; left: 25%; animation-delay: 1.7s;"></div>
+    <div class="particle" style="top: 55%; left: 15%; animation-delay: 1.9s;"></div>
+    <div class="particle" style="top: 25%; left: 55%; animation-delay: 1.5s;"></div>
+    <div class="particle" style="top: 15%; left: 60%; animation-delay: 1.7s;"></div>
+    <div class="particle" style="top: 35%; left: 70%; animation-delay: 1.9s;"></div>
+    <div class="particle" style="top: 75%; left: 75%; animation-delay: 1.5s;"></div>
+    <div class="particle" style="top: 85%; left: 80%; animation-delay: 1.7s;"></div>
+  </div>
+  <div class="footer">
+    <a href="https://www.instagram.com/code_addicted09/?utm_source=qr" id="#1" target="_blank">Made with❤️ by Himanshu💕</a>
+    <audio src="assets/birthday.mp3" autoplay loop></audio>
+  <script>
+    // Function to add hearts and balloons
+function addHeartsAndBalloons(type, count) {
+  const container = document.querySelector('.animations-container');
+  for (let i = 0; i < count; i++) {
+    const element = document.createElement('div');
+    element.className = type;
+    element.style.left = `${Math.random() * 100}%`;
+    element.style.animationDelay = `${Math.random() * 10}s`;
+    container.appendChild(element);
+  }
+}
+
+document.getElementById('addHearts').addEventListener('click', function() {
+  addHeartsAndBalloons('heart', 3);
+});
+
+document.getElementById('addBalloons').addEventListener('click', function() {
+  addHeartsAndBalloons('balloon', 3);
+});
+
+    // Inline JS for the starting page
+    document.getElementById('startButton').addEventListener('click', function() {
+      window.location.href = 'second.html';
+    });
+  </script>
+</body>
+</html>
